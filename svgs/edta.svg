@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+  <defs>
+    <style>.lig{fill:#e6eef6;font-size:11px;font-family:Inter,Arial}</style>
+  </defs>
+  <g id="edta">
+    <circle cx="120" cy="80" r="18" fill="#c44f2e" stroke="#7a2b1f" stroke-width="2" />
+    <text x="120" y="85" text-anchor="middle" fill="#fff" font-weight="700">Cu</text>
+
+    <!-- a stylised chelate 'ring' -->
+    <path d="M120 80 C 160 48, 200 48, 200 80 C 200 112, 160 112, 120 80 Z" stroke="#a3c4b8" stroke-width="3" fill="rgba(163,196,184,0.06)" />
+    <g>
+      <circle cx="164" cy="80" r="10" fill="#79b08f" />
+      <text x="164" y="84" class="lig" text-anchor="middle">O</text>
+    </g>
+    <g>
+      <circle cx="92" cy="80" r="10" fill="#79b08f" />
+      <text x="92" y="84" class="lig" text-anchor="middle">O</text>
+    </g>
+    <g>
+      <circle cx="120" cy="44" r="10" fill="#79b08f" />
+      <text x="120" y="48" class="lig" text-anchor="middle">N</text>
+    </g>
+  </g>
+</svg>

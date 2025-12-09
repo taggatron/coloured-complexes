@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+  <defs>
+    <style>.lig{fill:#e6eef6;font-size:11px;font-family:Inter,Arial}</style>
+  </defs>
+  <g id="aquo">
+    <circle cx="120" cy="80" r="18" fill="#c44f2e" stroke="#7a2b1f" stroke-width="2" />
+    <text x="120" y="85" text-anchor="middle" fill="#fff" font-weight="700">Cu</text>
+
+    <!-- six water ligands around -->
+    <g class="ligand">
+      <line x1="120" y1="80" x2="120" y2="18" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="120" cy="14" r="10" fill="#7fb8d6" />
+      <text x="120" y="18" class="lig" text-anchor="middle">H2O</text>
+    </g>
+
+    <g class="ligand">
+      <line x1="120" y1="80" x2="196" y2="38" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="200" cy="34" r="10" fill="#7fb8d6" />
+      <text x="200" y="38" class="lig" text-anchor="middle">H2O</text>
+    </g>
+
+    <g class="ligand">
+      <line x1="120" y1="80" x2="196" y2="122" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="200" cy="126" r="10" fill="#7fb8d6" />
+      <text x="200" y="130" class="lig" text-anchor="middle">H2O</text>
+    </g>
+
+    <g class="ligand">
+      <line x1="120" y1="80" x2="120" y2="142" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="120" cy="146" r="10" fill="#7fb8d6" />
+      <text x="120" y="150" class="lig" text-anchor="middle">H2O</text>
+    </g>
+
+    <g class="ligand">
+      <line x1="120" y1="80" x2="44" y2="122" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="40" cy="126" r="10" fill="#7fb8d6" />
+      <text x="40" y="130" class="lig" text-anchor="middle">H2O</text>
+    </g>
+
+    <g class="ligand">
+      <line x1="120" y1="80" x2="44" y2="38" stroke="#9fb6c9" stroke-width="2" />
+      <circle cx="40" cy="34" r="10" fill="#7fb8d6" />
+      <text x="40" y="38" class="lig" text-anchor="middle">H2O</text>
+    </g>
+  </g>
+</svg>

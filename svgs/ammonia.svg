@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+  <defs>
+    <style>.lig{fill:#e6eef6;font-size:11px;font-family:Inter,Arial}</style>
+  </defs>
+  <g id="ammonia">
+    <circle cx="120" cy="80" r="18" fill="#c44f2e" stroke="#7a2b1f" stroke-width="2" />
+    <text x="120" y="85" text-anchor="middle" fill="#fff" font-weight="700">Cu</text>
+
+    <!-- four NH3 ligands (tetra coordination representation) -->
+    <g>
+      <line x1="120" y1="80" x2="120" y2="18" stroke="#a3bfa8" stroke-width="2" />
+      <circle cx="120" cy="14" r="12" fill="#6fae8f" />
+      <text x="120" y="18" class="lig" text-anchor="middle">NH3</text>
+    </g>
+    <g>
+      <line x1="120" y1="80" x2="200" y2="80" stroke="#a3bfa8" stroke-width="2" />
+      <circle cx="204" cy="80" r="12" fill="#6fae8f" />
+      <text x="204" y="84" class="lig" text-anchor="middle">NH3</text>
+    </g>
+    <g>
+      <line x1="120" y1="80" x2="120" y2="142" stroke="#a3bfa8" stroke-width="2" />
+      <circle cx="120" cy="146" r="12" fill="#6fae8f" />
+      <text x="120" y="150" class="lig" text-anchor="middle">NH3</text>
+    </g>
+    <g>
+      <line x1="120" y1="80" x2="40" y2="80" stroke="#a3bfa8" stroke-width="2" />
+      <circle cx="36" cy="80" r="12" fill="#6fae8f" />
+      <text x="36" y="84" class="lig" text-anchor="middle">NH3</text>
+    </g>
+  </g>
+</svg>

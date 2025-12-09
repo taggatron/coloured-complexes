@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Copper Ligand Colour Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div>
+        <h1>Copper Ligand Colour Simulator</h1>
+        <p class="subtitle">Explore how copper complexes change colour in the Benedict's and Biuret tests.</p>
+      </div>
+      <div class="credits">Interactive demo • Educational</div>
+    </header>
+
+    <main class="container">
+      <section class="controls card">
+        <label class="field">
+          <span class="label">Test</span>
+          <select id="testSelect">
+            <option value="benedicts">Benedict's Test (reducing sugars)</option>
+            <option value="biuret">Biuret Test (peptide bonds)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Ligand / Complex</span>
+          <select id="ligandSelect">
+            <option value="aquo">Aqua complex (water ligands)</option>
+            <option value="ammonia">Ammonia complex (NH3)</option>
+            <option value="biuret">Biuret-type ligand</option>
+            <option value="edta">EDTA (chelating ligand)</option>
+          </select>
+        </label>
+        <div class="field">
+          <span class="label">Photon animation</span>
+          <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="photonToggle" checked> Show photons</label>
+        </div>
+        <label class="field">
+          <span class="label">Photon density</span>
+          <input id="photonDensity" type="range" min="0" max="1" step="0.01" value="0.9">
+          <output id="photonDensityVal">0.90</output>
+        </label>
+        <label class="field">
+          <span class="label">Photon speed multiplier</span>
+          <input id="photonSpeed" type="range" min="0.2" max="3" step="0.05" value="1">
+          <output id="photonSpeedVal">1.00×</output>
+        </label>
+
+        <div id="benedictsControls">
+          <label class="field">
+            <span class="label">Reducing sugar concentration</span>
+            <input id="sugar" type="range" min="0" max="1" step="0.01" value="0.4">
+            <output id="sugarVal">0.40</output>
+          </label>
+          <label class="field">
+            <span class="label">Temperature (°C)</span>
+            <input id="temp" type="range" min="20" max="100" step="1" value="80">
+            <output id="tempVal">80°C</output>
+          </label>
+        </div>
+
+        <div id="biuretControls" class="hidden">
+          <label class="field">
+            <span class="label">Peptide concentration</span>
+            <input id="peptide" type="range" min="0" max="1" step="0.01" value="0.5">
+            <output id="peptideVal">0.50</output>
+          </label>
+          <label class="field">
+            <span class="label">Alkalinity (pH)</span>
+            <input id="ph" type="range" min="7" max="14" step="0.1" value="10">
+            <output id="phVal">10.0</output>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="startBtn" class="btn">Run Reaction</button>
+          <button id="resetBtn" class="btn btn-ghost">Reset</button>
+        </div>
+      </section>
+
+      <section class="viewer card">
+        <div class="sample-area">
+          <div class="ligand-display">
+            <div id="ligandSvg" class="ligand-svg" aria-hidden="true"></div>
+          </div>
+          <div id="solution" class="solution"></div>
+          <!-- overlay canvas covers ligand display + solution for spatial absorption -->
+          <canvas id="photons" class="photons" width="640" height="320" aria-hidden="true"></canvas>
+        </div>
+        <div class="info">
+          <h2 id="resultTitle">Result</h2>
+          <p id="resultText">Choose a test and press <strong>Run Reaction</strong> to simulate colour changes.</p>
+          <div class="legend">
+            <div><strong>Wavelength (approx.)</strong>: <span id="wavelength">—</span></div>
+            <div><strong>Absorbance hint</strong>: <span id="absorbance">—</span></div>
+          </div>
+          <div class="spectrum">
+            <canvas id="spectrum" width="320" height="140"></canvas>
+            <div class="spectrum-caption">Simulated absorbance spectrum (arb. units)</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer card small">
+      <strong>Notes</strong>: This simulation is illustrative — simplified colour mixing models approximate real chemistry.
+    </footer>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

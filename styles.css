@@ -1,0 +1,70 @@
+:root{
+  --bg: #0f1724;
+  --card: linear-gradient(180deg,#0b1220 0%, #0f1724 100%);
+  --glass: rgba(255,255,255,0.03);
+  --accent: #6ee7b7;
+  --muted: #9aa6b2;
+  --glass-2: rgba(255,255,255,0.02);
+}
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin:0; background: radial-gradient(1200px 600px at 10% 10%, rgba(80,60,120,0.15), transparent), var(--bg);
+  color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; padding:32px;
+}
+.app{max-width:1100px;margin:0 auto}
+.app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.app-header h1{margin:0;font-size:20px}
+.subtitle{margin:4px 0;color:var(--muted);font-size:13px}
+.credits{font-size:12px;color:var(--muted)}
+.container{display:grid;grid-template-columns:360px 1fr;gap:20px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 6px 30px rgba(2,6,23,0.6);}
+.controls .field{display:flex;flex-direction:column;margin-bottom:14px}
+.label{font-size:13px;color:var(--muted);margin-bottom:8px}
+select,input[type=range]{width:100%}
+input[type=range]{accent-color:var(--accent)}
+output{display:inline-block;margin-left:8px;color:var(--muted);font-weight:600}
+.actions{display:flex;gap:8px;margin-top:6px}
+.btn{background:linear-gradient(90deg,#2d6cdf,#6b8bff);border:none;color:white;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.viewer{display:flex;gap:18px;align-items:center}
+.sample-area{flex:1;display:flex;align-items:center;justify-content:center;position:relative}
+.solution{width:320px;height:240px;border-radius:14px;background:linear-gradient(180deg,#0d2b4a,#06324a);box-shadow:inset 0 8px 30px rgba(0,0,0,0.6);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+.precipitate{display:none}
+
+/* canvas overlay for photon animation inside the solution */
+.photons{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;border-radius:14px}
+.info{width:320px}
+.info h2{margin-top:0}
+.legend{margin-top:8px;color:var(--muted);font-size:13px}
+.spectrum{margin-top:12px}
+#spectrum{width:100%;height:auto;border-radius:8px;display:block;border:1px solid rgba(255,255,255,0.04);box-shadow:inset 0 4px 18px rgba(0,0,0,0.6)}
+.spectrum-caption{font-size:12px;color:var(--muted);margin-top:6px}
+
+.ligand-display{width:160px;display:flex;align-items:center;justify-content:center;margin-right:14px}
+.ligand-svg{width:160px;height:140px}
+.ligand-svg svg{width:100%;height:100%}
+.ligand-svg .ligand{transform-origin:120px 80px;transition:transform .35s ease}
+.ligand-svg .ligand.pulse{transform:scale(1.06)}
+.ligand-svg .ligand.vibrate{animation:vibrate 360ms ease-in-out}
+@keyframes vibrate{
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-3deg); }
+  50% { transform: translateY(0px) rotate(2deg); }
+  75% { transform: translateY(-2px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@media (max-width:900px){
+  .ligand-display{order:-1;margin-bottom:12px}
+}
+.footer{margin-top:18px}
+.small{font-size:13px}
+.hidden{display:none}
+
+@media (max-width:900px){
+  .container{grid-template-columns:1fr;}
+  .viewer .info{width:100%}
+  .solution{width:100%;height:200px}
+}
