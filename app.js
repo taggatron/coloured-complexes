@@ -66,6 +66,9 @@ const LIGAND_PROFILES = {
   edta: { peakShift: -150, ampMult: 1.4, widthMult: 0.6 }
 };
 
+// Photon system limits/tuning
+const MAX_PHOTONS = 90; // hard cap to avoid visual overload
+const SPAWN_SCALE = 0.22; // scale down spawn probability (density * SPAWN_SCALE)
 function assignLigandNodes(ligandName){
   const profile = LIGAND_PROFILES[ligandName] || { peakShift:0, ampMult:1, widthMult:1 };
   const ligElems = ligandSvgContainer.querySelectorAll('.ligand');
@@ -88,6 +91,22 @@ function assignLigandNodes(ligandName){
     el.dataset.center = centerW; el.dataset.width = widthW;
     window._ligandNodes.push({ el, x, y, centerW, widthW });
   });
+}
+
+function getPhotonYRange(){
+  // derive a Y spawn range from ligand nodes (if available) so photons pass only through SVG height
+  const canvasH = photonCanvas ? (photonCanvas.height / (window.devicePixelRatio || 1)) : 0;
+  if(window._ligandNodes && window._ligandNodes.length){
+    let minY = Infinity, maxY = -Infinity;
+    for(const n of window._ligandNodes){ if(n.y < minY) minY = n.y; if(n.y > maxY) maxY = n.y; }
+    // add a small vertical margin so photons graze the nodes visually
+    minY = Math.max(6, minY - 18);
+    maxY = Math.min(canvasH - 6, maxY + 18);
+    if(maxY <= minY) { minY = Math.max(6, (canvasH * 0.2)); maxY = Math.min(canvasH - 6, canvasH * 0.8); }
+    return { minY, maxY };
+  }
+  // fallback: slightly inset from canvas edges
+  return { minY: 20, maxY: Math.max(24, canvasH - 20) };
 }
 
 function hexToRgb(hex){
@@ -300,7 +319,9 @@ function spawnPhoton(){
   const canvasW = photonCanvas.width / (window.devicePixelRatio||1);
   const canvasH = photonCanvas.height / (window.devicePixelRatio||1);
   const x = -8 + Math.random() * 28; // start slightly off-canvas to the left
-  const y = 20 + Math.random() * Math.max(1, canvasH - 40);
+  // constrain Y to the vertical span of the ligand SVG (so photons only pass through the SVG height)
+  const { minY, maxY } = getPhotonYRange();
+  const y = minY + Math.random() * Math.max(1, (maxY - minY));
   const color = wavelengthToRgb(w);
   // sine-wave photon properties: amplitude, frequency, phase
   const amp = 3 + Math.random()*5;
@@ -308,7 +329,7 @@ function spawnPhoton(){
   const phase = Math.random()*Math.PI*2;
   const speedMult = photonSpeed ? parseFloat(photonSpeed.value) : 1;
   photons.push({ x, y, w, color, alpha: 1, speed: (60 + Math.random()*120) * speedMult, amp, freq, phase });
-  if(photons.length > 160) photons.shift();
+  if(photons.length > MAX_PHOTONS) photons.shift();
 }
 
 function getAbsorbForWavelength(w){
@@ -323,12 +344,13 @@ function getAbsorbForWavelength(w){
 function animatePhotons(ts){
   if(!pCtx || !photonCanvas) return;
   if(!lastTime) lastTime = ts; const dt = Math.min(50, ts - lastTime) / 1000; lastTime = ts;
-  // spawn based on photon density control and toggle
+  // spawn based on photon density control and toggle (scaled down)
   const density = photonDensity ? parseFloat(photonDensity.value) : 0.9;
-  if(photonToggle && !photonToggle.checked) {
-    // skip spawning when disabled
-  } else {
-    if(Math.random() < density) spawnPhoton();
+  if(!(photonToggle && !photonToggle.checked)){
+    if(Math.random() < density * SPAWN_SCALE) {
+      // only spawn if we're under cap
+      if(photons.length < MAX_PHOTONS) spawnPhoton();
+    }
   }
   const ctx = pCtx; const w = photonCanvas.width / (window.devicePixelRatio||1); const h = photonCanvas.height / (window.devicePixelRatio||1);
   ctx.clearRect(0,0,w,h);
