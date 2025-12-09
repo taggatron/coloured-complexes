@@ -58,6 +58,13 @@ if(photonDensity){ photonDensity.addEventListener('input', e=> photonDensityVal.
 if(photonSpeed){ photonSpeed.addEventListener('input', e=> photonSpeedVal.value = parseFloat(e.target.value).toFixed(2) + '×'); }
 if(photonToggle){ photonToggle.addEventListener('change', ()=> { if(!photonToggle.checked) photons = []; }); }
 
+// initialize default photon density (user-requested default)
+if(photonDensity){
+  // set default only if not already set in HTML
+  try{ if(!photonDensity.value || photonDensity.value === '') photonDensity.value = 0.4; }catch(e){}
+  photonDensityVal.value = parseFloat(photonDensity.value).toFixed(2);
+}
+
 // ligand spectral profiles (illustrative)
 const LIGAND_PROFILES = {
   aquo: { peakShift: 60, ampMult: 0.7, widthMult: 1.2 },
